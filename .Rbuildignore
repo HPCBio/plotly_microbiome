@@ -1,0 +1,12 @@
+^.git$
+^.gitignore$
+^.gitattributes$
+^README\.md$
+^code_of_conduct\.md$
+^pull_request_template\.md$
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.Rhistory$
+^vignettes/*.\.html$
+^vignettes/*.\.md$
+^vignettes/*._files$

@@ -1,0 +1,14 @@
+Package: plotly_microbiome
+Version: 0.0
+Date: 2021-02-04
+Title: Helper Functions for Plotly Graphs in Microbiome Work
+Authors@R: c(person("Lindsay V.", "Clark", email = "lvclark@illinois.edu",
+                    role = c("aut", "cre"), 
+                    comment = c(ORCID = "0000-0002-3881-9252")))
+Maintainer: Lindsay V. Clark <lvclark@illinois.edu>
+Depends: plotly
+Suggests: phyloseq
+Description: Helper functions for nice interactive plots from phyloseq and
+  other workflows.
+License: GPL (>= 2)
+URL: https://github.com/HPCBio/plotly_microbiome
