@@ -25,7 +25,7 @@ beta_diversity_3d.data.frame <- function(x, axes = colnames(x)[1:3],
       catvals <- levels(x[[color.column]])
     }
     if(is.factor(x[[color.column]]) || is.character(x[[color.column]])){
-      color.key <- dittoSeq::dittoColors()[seq_along(catvals)]
+      color.key <- dittoColors()[seq_along(catvals)]
       names(color.key) <- catvals
     }
     if(is.numeric(x[[color.column]])){

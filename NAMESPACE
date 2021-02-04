@@ -1,0 +1,9 @@
+export(beta_diversity_3d)
+
+S3method(beta_diversity_3d, data.frame)
+S3method(beta_diversity_3d, monoMDS)
+
+importFrom("stats", "reformulate")
+importFrom("plotly", "plot_ly")
+importFrom("viridis", "viridis")
+importFrom("dittoSeq", "dittoColors")
