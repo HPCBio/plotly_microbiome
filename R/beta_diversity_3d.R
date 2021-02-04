@@ -1,3 +1,5 @@
+# 3D scatter plots of beta diversity
+
 beta_diversity_3d <- function(x, ...){
   UseMethod("beta_diversity_3d", x)
 }
@@ -14,7 +16,7 @@ beta_diversity_3d.data.frame <- function(x, axes = colnames(x)[1:3],
   if(!color.column %in% colnames(x)) stop("color.column must be in column names of x")
   if(!label.column %in% colnames(x)) stop("label.column must be in column names of x")
   
-  # make a color scheme using dittoSeq for a categorical color column
+  # make a color scheme using dittoSeq for a categorical color column, or viridis for numeric
   if(is.null(color.key)){
     if(is.character(x[[color.column]])){
       catvals <- unique(x[[color.column]])
@@ -25,6 +27,9 @@ beta_diversity_3d.data.frame <- function(x, axes = colnames(x)[1:3],
     if(is.factor(x[[color.column]]) || is.character(x[[color.column]])){
       color.key <- dittoSeq::dittoColors()[seq_along(catvals)]
       names(color.key) <- catvals
+    }
+    if(is.numeric(x[[color.column]])){
+      color.key <- viridis(100)
     }
   }
   if(is.factor(x[[color.column]])){
@@ -45,4 +50,25 @@ beta_diversity_3d.data.frame <- function(x, axes = colnames(x)[1:3],
                type = "scatter3d", mode = "markers",
                ...)
   return(p)
+}
+
+# to use directly on phyloseq::ordinate output for NMDS
+beta_diversity_3d.monoMDS <- function(x,
+                                      metadata,
+                                      color.column,
+                                      label.column = NULL,
+                                      color.key = NULL,
+                                      ...){
+  if(ncol(x$points) < 3){
+    stop("Need at least three ordination axes.")
+  }
+  if(is.null(label.column)){
+    df <- data.frame(x$points[,1:3],
+                     metadata[,color.column],
+                     Label = rownames(x$points))
+  } else {
+    df <- data.frame(x$points[,1:3],
+                     metadata[,c(color.column, label.column)])
+  }
+  return(beta_diversity_3d(df, color.key = color.key, ...))
 }
