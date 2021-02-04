@@ -86,5 +86,20 @@ ord_mfiber_prop4a <- vegan::metaMDS(dist_mfiber_4, k = 3)
 
 beta_diversity_3d(ord_mfiber_prop4a,
                   sample_data(ps_mfiber_prop), "TRT", "Label")
+
+# Changing title and axis labels, manually setting colors, and saving
+
+mfiber_colors <- c(CO = "magenta", BP = "black", MF = "turquoise",
+                   FOS = "orange", RS = "skyblue", TP = "green")
+
+p1 <- beta_diversity_3d(ord_mfiber_prop1a,
+                  sample_data(ps_mfiber_prop), "TRT", "Label",
+                  color.key = mfiber_colors) %>%
+  layout(title = "NMDS with Bray distance",
+         scene = list(xaxis = list(title = "Axis 1"),
+                      yaxis = list(title = "Axis 2"),
+                      zaxis = list(title = "Axis 3")))
+htmlwidgets::saveWidget(partial_bundle(p1),
+                        file = "results/NMDS_Bray_MFiber_plotly.html")
 }
 }

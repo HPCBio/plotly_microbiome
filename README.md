@@ -8,3 +8,9 @@ Install with
 ```
 devtools::install_github("hpcbio/plotly_microbiome")
 ```
+
+Load with
+
+```
+library(plotly.microbiome)
+```
