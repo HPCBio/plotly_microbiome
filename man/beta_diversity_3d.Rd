@@ -95,7 +95,7 @@ mfiber_colors <- c(CO = "magenta", BP = "black", MF = "turquoise",
 p1 <- beta_diversity_3d(ord_mfiber_prop1a,
                   sample_data(ps_mfiber_prop), "TRT", "Label",
                   color.key = mfiber_colors) %>%
-  layout(title = "NMDS with Bray distance",
+  plotly::layout(title = "NMDS with Bray distance",
          scene = list(xaxis = list(title = "Axis 1"),
                       yaxis = list(title = "Axis 2"),
                       zaxis = list(title = "Axis 3")))
