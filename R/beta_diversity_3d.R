@@ -72,3 +72,28 @@ beta_diversity_3d.monoMDS <- function(x,
   }
   return(beta_diversity_3d(df, color.key = color.key, ...))
 }
+
+# to use directly on phyloseq::ordinate output for PCoA
+beta_diversity_3d.pcoa <- function(x,
+                                   metadata,
+                                   color.column,
+                                   label.column = NULL,
+                                   color.key = NULL,
+                                   ...){
+  if(is.null(label.column)){
+    df <- data.frame(x$vectors[,1:3],
+                     metadata[,color.column],
+                     Label = rownames(x$vectors))
+  } else {
+    df <- data.frame(x$vectors[,1:3],
+                     metadata[,c(color.column, label.column)])
+  }
+  
+  pct.var <- round(x$values$Relative_eig[1:3] * 100, digits = 1)
+  axis.labs <- paste0(colnames(df)[1:3], " (", pct.var, "%)")
+  
+  return(plotly::layout(beta_diversity_3d(df, color.key = color.key, ...),
+             scene = list(xaxis = list(title = axis.labs[1]),
+                          yaxis = list(title = axis.labs[2]),
+                          zaxis = list(title = axis.labs[3]))))
+}

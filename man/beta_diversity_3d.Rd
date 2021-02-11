@@ -2,13 +2,15 @@
 \alias{beta_diversity_3d}
 \alias{beta_diversity_3d.data.frame}
 \alias{beta_diversity_3d.monoMDS}
+\alias{beta_diversity_3d.pcoa}
 \title{
 Draw 3D Scatterplot of Beta Diversity
 }
 \description{
 This is a wrapper function for \code{plot_ly} with the
 "scatterplot3d" option.  It can be used on a data frame, or directly on the
-output of \code{phyloseq::ordinate} with the NMDS method or \code{vegan::metaMDS}.
+output of \code{phyloseq::ordinate} with the NMDS or PCoA method
+(or \code{vegan::metaMDS} or \code{ape::pcoa}, respectively).
 Default categorical colors are from \pkg{dittoSeq}.
 }
 \usage{
@@ -23,11 +25,16 @@ beta_diversity_3d(x, ...)
                   color.column,
                   label.column = NULL,
                   color.key = NULL, \dots)
+
+\method{beta_diversity_3d}{pcoa}(x, metadata,
+                  color.column,
+                  label.column = NULL,
+                  color.key = NULL, \dots)
 }
 
 \arguments{
   \item{x}{
-A data frame or \code{"monoMDS"} object containing ordination results.
+A data frame, \code{"monoMDS"}, or \code{"pcoa"} object containing ordination results.
 }
 \item{axes}{
 If \code{x} is a data frame, the column names for three axes to plot.
