@@ -6,7 +6,7 @@ Inspiration from https://towardsdatascience.com/how-to-give-life-to-your-microbi
 Install with
 
 ```
-devtools::install_github("hpcbio/plotly_microbiome")
+install.packages("plotly.microbiome", repos = "https://lvclark.r-universe.dev")
 ```
 
 Load with
