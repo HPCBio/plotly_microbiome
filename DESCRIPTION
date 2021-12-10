@@ -1,6 +1,6 @@
 Package: plotly.microbiome
-Version: 0.0
-Date: 2021-02-04
+Version: 0.0.9001
+Date: 2021-12-10
 Title: Helper Functions for Plotly Graphs in Microbiome Work
 Authors@R: c(person("Lindsay V.", "Clark", email = "lvclark@illinois.edu",
                     role = c("aut", "cre"), 
