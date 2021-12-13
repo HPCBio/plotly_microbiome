@@ -6,7 +6,7 @@ Authors@R: c(person("Lindsay V.", "Clark", email = "lvclark@illinois.edu",
                     role = c("aut", "cre"), 
                     comment = c(ORCID = "0000-0002-3881-9252")))
 Maintainer: Lindsay V. Clark <lvclark@illinois.edu>
-Imports: plotly, dittoSeq, viridis
+Imports: plotly, dittoSeq, viridis, rlang
 Suggests: phyloseq, dplyr, tidyr
 Description: Helper functions for nice interactive plots from phyloseq and
   other workflows.

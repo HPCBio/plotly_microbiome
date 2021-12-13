@@ -1,6 +1,6 @@
-summarizeCounts <- function(psobj, rank = "Family",
-                            keepcols = c("Sample", "Group", "Label", "ID"),
-                            minprop = 0.01, mean_across_samples = NULL){
+composition_df <- function(psobj, rank = "Family",
+                           keepcols = c("Sample", "Group", "Label", "ID"),
+                           minprop = 0.05, mean_across_samples = NULL){
   if(!all(keepcols %in% colnames(phyloseq::sample_data(psobj)))){
     stop("All column names in keepcols should be found in sample_data(psobj).")
   }
@@ -29,9 +29,9 @@ summarizeCounts <- function(psobj, rank = "Family",
   # Get everything into long format for ggplot
   df1 <- data.frame(ID = colnames(rs), t(rs), check.names = FALSE)
   df2 <- data.frame(ID = colnames(rs_norm), t(rs_norm), check.names = FALSE)
-  df1 <- tidyr::pivot_longer(df1, !ID, names_to = rank,
+  df1 <- tidyr::pivot_longer(df1, !.data$ID, names_to = rank,
                              values_to = "Counts")
-  df2 <- tidyr::pivot_longer(df2, !ID, names_to = rank,
+  df2 <- tidyr::pivot_longer(df2, !.data$ID, names_to = rank,
                              values_to = "Proportion")
   dfout <- suppressMessages(dplyr::left_join(df1, df2))
   sams <- data.frame(phyloseq::sample_data(psobj)[,keepcols])
@@ -50,7 +50,7 @@ summarizeCounts <- function(psobj, rank = "Family",
   # summarize across sample groups if desired
   if(!is.null(mean_across_samples)){
     dfout <- dplyr::summarise(dplyr::group_by(dfout, .data[[mean_across_samples]], .data[[rank]]),
-                     Proportion = mean(Proportion), Counts = sum(Counts), .groups = "drop_last")
+                     Proportion = mean(.data$Proportion), Counts = sum(.data$Counts), .groups = "drop_last")
     grplvls <- length(unique(sams[[mean_across_samples]]))
     # Add other columns back in if they have one value per group
     for(col in setdiff(keepcols, c(rank, mean_across_samples))){
