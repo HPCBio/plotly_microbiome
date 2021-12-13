@@ -25,8 +25,8 @@ The following values will result in output of \code{FALSE}.
 \item \code{NA}
 \item An empty string.
 \item The words \dQuote{unclassified}, \dQuote{unidentified},
-\dQuote{uncultured}, or \dQuote{metagenome} anywhere in the string,
-in any case.
+\dQuote{uncultured}, \dQuote{unknown}, or \dQuote{metagenome} anywhere in the
+string, in any case.
 \item Values equal to \dQuote{human_gut.}
 }
 }
