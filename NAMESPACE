@@ -1,6 +1,7 @@
 export(beta_diversity_3d,
        composition_df,
-       findnonmissing)
+       findnonmissing,
+       make_taxa_labels)
 
 S3method(beta_diversity_3d, data.frame)
 S3method(beta_diversity_3d, monoMDS)
