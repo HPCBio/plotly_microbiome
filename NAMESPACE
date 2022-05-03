@@ -6,7 +6,7 @@ export(beta_diversity_3d,
 S3method(beta_diversity_3d, data.frame)
 S3method(beta_diversity_3d, monoMDS)
 S3method(beta_diversity_3d, pcoa)
-S3method(beta_diversity_d3, MDS)
+S3method(beta_diversity_3d, MDS)
 
 importFrom("stats", "reformulate")
 importFrom("plotly", "plot_ly")
