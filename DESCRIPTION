@@ -1,13 +1,13 @@
 Package: plotly.microbiome
-Version: 0.0.9002
-Date: 2022-03-19
+Version: 0.0.9003
+Date: 2022-05-03
 Title: Helper Functions for Plotly Graphs in Microbiome Work
 Authors@R: c(person("Lindsay V.", "Clark", email = "lvclark@illinois.edu",
                     role = c("aut", "cre"), 
                     comment = c(ORCID = "0000-0002-3881-9252")))
 Maintainer: Lindsay V. Clark <lvclark@illinois.edu>
 Imports: plotly, dittoSeq, viridis, rlang
-Suggests: phyloseq, dplyr, tidyr
+Suggests: phyloseq, dplyr, tidyr, limma
 Description: Helper functions for nice interactive plots from phyloseq and
   other workflows.
 License: GPL (>= 2)

@@ -97,3 +97,27 @@ beta_diversity_3d.pcoa <- function(x,
                           yaxis = list(title = axis.labs[2]),
                           zaxis = list(title = axis.labs[3]))))
 }
+
+# to use directly on limma::plotMDS output
+beta_diversity_3d.MDS <- function(x,
+                                  metadata,
+                                  color.column,
+                                  label.column = NULL,
+                                  color.key = NULL, ...){
+  if(is.null(label.column)){
+    df <- data.frame(x$eigen.vectors[,1:3],
+                     metadata[,color.column],
+                     Label = colnames(x$distance.matrix.squared))
+  } else {
+    df <- data.frame(x$vectors[,1:3],
+                     metadata[,c(color.column, label.column)])
+  }
+  
+  pct.var <- round(x$var.explained[1:3] * 100, digits = 1)
+  axis.labs <- paste0("PC", 1:3, " (", pct.var, "%)")
+  
+  return(plotly::layout(beta_diversity_3d(df, color.key = color.key, ...),
+                        scene = list(xaxis = list(title = axis.labs[1]),
+                                     yaxis = list(title = axis.labs[2]),
+                                     zaxis = list(title = axis.labs[3]))))
+}

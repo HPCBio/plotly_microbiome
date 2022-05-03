@@ -3,6 +3,7 @@
 \alias{beta_diversity_3d.data.frame}
 \alias{beta_diversity_3d.monoMDS}
 \alias{beta_diversity_3d.pcoa}
+\alias{beta_diversity_3d.MDS}
 \title{
 Draw 3D Scatterplot of Beta Diversity
 }
@@ -10,7 +11,8 @@ Draw 3D Scatterplot of Beta Diversity
 This is a wrapper function for \code{plot_ly} with the
 "scatterplot3d" option.  It can be used on a data frame, or directly on the
 output of \code{phyloseq::ordinate} with the NMDS or PCoA method
-(or \code{vegan::metaMDS} or \code{ape::pcoa}, respectively).
+(or \code{vegan::metaMDS} or \code{ape::pcoa}, respectively),
+or on the output of \code{limma::plotMDS}.
 Default categorical colors are from \pkg{dittoSeq}.
 }
 \usage{
@@ -30,11 +32,17 @@ beta_diversity_3d(x, ...)
                   color.column,
                   label.column = NULL,
                   color.key = NULL, \dots)
+
+\method{beta_diversity_3d}{MDS}(x, metadata,
+                  color.column,
+                  label.column = NULL,
+                  color.key = NULL, \dots)
 }
 
 \arguments{
   \item{x}{
-A data frame, \code{"monoMDS"}, or \code{"pcoa"} object containing ordination results.
+A data frame, \code{"monoMDS"}, \code{"pcoa"}, or \code{"MDS"} object containing
+ordination results.
 }
 \item{axes}{
 If \code{x} is a data frame, the column names for three axes to plot.
@@ -48,7 +56,7 @@ This column should be found in \code{x} if \code{x} is a data frame, or in
 The name of a character column to be used for labeling points.
 This column should be found in \code{x} if \code{x} is a data frame, or in
 \code{metadata} otherwise.  It defaults to sample names if \code{x} is a
-\code{"monoMDS"}.
+\code{"monoMDS"} or \code{"MDS"}.
 }
 \item{color.key}{
 If \code{color.column} refers to a character or factor column, a named vector
@@ -93,6 +101,11 @@ ord_mfiber_prop4a <- vegan::metaMDS(dist_mfiber_4, k = 3)
 
 beta_diversity_3d(ord_mfiber_prop4a,
                   sample_data(ps_mfiber_prop), "TRT", "Label")
+                  
+# MDS of gene expression with limma
+mds1 <- plotMDS(logCPM.filt, top = 5000)
+beta_diversity_3d(mds1, metadata = d.filt$samples,
+                  color.column = "Group")
 
 # Changing title and axis labels, manually setting colors, and saving
 
